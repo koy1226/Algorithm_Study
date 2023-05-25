@@ -1,8 +1,6 @@
 ﻿#include "Common.h"
 //시간 복잡도 O(N^2) 3 ≤ N ≤ 100,000  ->>  C++기준 2000만/sec << 100억으로 시간 초과 발생한다.
 //게다가 3중 for문 부분도 있어 더 걸릴 것이다.
-//시간 복잡도 O(N log N)로 해결이 필요함  ->> 50만 << 2000/sec으로 시간 문제 해결 가능
-//Merge sort OR Quick sort OR divide and conquer
 
 int main()
 {
