@@ -1,9 +1,9 @@
 #include "Common.h"
 
-//½Ã°£ º¹Àâµµ O(NlogN)·Î ÇØ°áÀÌ ÇÊ¿äÇÔ  ->> 50¸¸ << 2000/secÀ¸·Î ½Ã°£ ¹®Á¦ ÇØ°á °¡´É
+//ì‹œê°„ ë³µìž¡ë„ O(NlogN)ë¡œ í•´ê²°ì´ í•„ìš”í•¨  ->> 50ë§Œ << 2000/secìœ¼ë¡œ ì‹œê°„ ë¬¸ì œ í•´ê²° ê°€ëŠ¥
 //Merge sort OR Quick sort OR divide and conquer
-//algorithm°ú vector ¶óÀÌºê·¯¸®¸¦ ÀÌ¿ëÇÏ¿© quick sort¸¦ ÁøÇàÇÏÁö¸¸,
-//ÀÌ¹Ì Á¤·ÄµÇ¾î ÀÖ°Å³ª ¿ÏÀüÈ÷ ¿ª¼øÀ¸·Î Á¤·ÄµÈ °æ¿ì¿¡´Â O(N^2)ÀÇ ½Ã°£ º¹Àâµµ¸¦ °¡Áú ¼ö ÀÖ´Ù.
+//algorithmê³¼ vector ë¼ì´ë¸ŒëŸ¬ë¦¬ë¥¼ ì´ìš©í•˜ì—¬ quick sortë¥¼ ì§„í–‰í•˜ì§€ë§Œ,
+//ì´ë¯¸ ì •ë ¬ë˜ì–´ ìžˆê±°ë‚˜ ì™„ì „ížˆ ì—­ìˆœìœ¼ë¡œ ì •ë ¬ëœ ê²½ìš°ì—ëŠ” O(N^2)ì˜ ì‹œê°„ ë³µìž¡ë„ë¥¼ ê°€ì§ˆ ìˆ˜ ìžˆë‹¤ã… ã… 
 
 struct Student {
 	vector<int> Scores;
@@ -16,7 +16,7 @@ bool compare(pair<int, int>& a, pair<int, int>& b) {
 	if (a.second != b.second) {
 		return a.second > b.second;
 	}
-	return a.first < b.first; //Á¡¼ö°¡ ³ôÀº ÇÐ»ýÀÌ ¸ÕÀú ¿È.
+	return a.first < b.first; //ì ìˆ˜ê°€ ë†’ì€ í•™ìƒì´ ë¨¼ì € ì˜´.
 }
 
 void calculateRank(vector<int>& scores, vector<int>& ranks, int N) {
