@@ -4,6 +4,7 @@
 //Merge sort OR Quick sort OR divide and conquer
 //algorithm과 vector 라이브러리를 이용하여 quick sort를 진행하지만,
 //이미 정렬되어 있거나 완전히 역순으로 정렬된 경우에는 O(N^2)의 시간 복잡도를 가질 수 있다ㅠㅠ
+//그래도 모든 테스트 케이스 통과!
 
 struct Student {
 	vector<int> Scores;
