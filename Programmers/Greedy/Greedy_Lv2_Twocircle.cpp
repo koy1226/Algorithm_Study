@@ -12,6 +12,7 @@ x축과 y축으로 이루어진 2차원 직교 좌표계에 중심이 원점인 
 r1	r2	result
 2	3	20
 */
+// Case 1
 #include <string>
 #include <vector>
 #include <cmath>
@@ -26,21 +27,28 @@ long long solution(int r1, int r2) {
     // About each x, max y = sqrt(r*r - x*x)
     
     for(long long x = 1; x <= r2; x++){
+        // Calculate coordinates between two circles
         long long y2 = sqrt((long long)r2 * r2 - x * x);
         long long y1 = sqrt((long long)r1 * r1 - x * x);
         
+        // If y1 and x are exactly on the border of the small circle, decrease y1 by 1.
+        // This is to exclude points on the border of the small circle.
         if(y1 * y1 + x * x == (long long)r1 * r1 && y1 != 0)
             y1 -= 1;
         
+        // Find the number of y coordinates between y2 and y1.
         long long y = y2 - y1;
         answer += y;
     }
-    answer *= 4;                // Because of 1st, 2nd, 3rd, 4th quadrants
-    answer += 4 * (r2 - r1+1);  // Points on the line
+    answer *= 4;                // Because it is a quadrant, multiply the correct answer by 4.
+    answer += 4 * (r2 - r1+1);  // Add the points on the boundary of the circle.
 
     return answer;
 }
 /*
+Case 2
+but score is 60/100.
+
 #include <string>
 #include <vector>
 #include <cmath>
