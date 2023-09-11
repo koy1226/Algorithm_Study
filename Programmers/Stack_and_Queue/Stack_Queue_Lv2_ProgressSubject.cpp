@@ -105,24 +105,22 @@ vector<string> solution(vector<vector<string>> plans) {
 }
 */
 
-//Final code
 #include <string>
 #include <vector>
 #include <algorithm>
+#include <stack>
 #include <queue>
 
 using namespace std;
 
-struct task {
+struct Task {
     string subject;
     int start_time;
     int running_time;
-    int remaining_time;
+    bool operator<(const Task& theOther) const{
+        return start_time > theOther.start_time;
+    }
 };
-
-bool cmpStartTime(task& a, task& b) {
-    return a.start_time < b.start_time;
-}
 
 int timeString2Int(string& timeStr) {
     return stoi(timeStr.substr(0, 2)) * 60 + stoi(timeStr.substr(3, 2));
@@ -130,64 +128,54 @@ int timeString2Int(string& timeStr) {
 
 vector<string> solution(vector<vector<string>> plans) {
     vector<string> answer;
-    vector<task> tasks;
-    queue<task> paused_tasks;
+    priority_queue<Task> tasks;
+    stack<Task> paused_tasks;
     
     for (vector<string>& plan : plans) {
         string subject = plan[0];
         int start_time = timeString2Int(plan[1]);
         int running_time = stoi(plan[2]);
-        tasks.push_back({subject, start_time, running_time, running_time});
+        tasks.push({subject, start_time, running_time});
     }
-    
-    sort(tasks.begin(), tasks.end(), cmpStartTime);
 
-    task current_task;
-    int current_time = tasks.empty() ? 0 : tasks[0].start_time;
-    int task_idx = 0;
+    Task current_task = {"", 0, 0};
+    int current_time = 0;
     
-    // 새로운 작업이 있거나 중단된 작업이 있으면 반복
-    while (task_idx < tasks.size() || !paused_tasks.empty()) {
-        // 새로운 작업의 시작 시간이 현재 시간보다 작을 때
-        if (task_idx < tasks.size() && tasks[task_idx].start_time <= current_time) {
-            // 현재 작업이 남아있을 때
-            if (current_task.remaining_time > 0) {
+    // 작업의 시간이 남았거나 작업 큐가 비어있지 않을 때
+    while (current_task.running_time > 0 || !tasks.empty()) {
+        // 작업 큐가 비어있지 않고 남은 다음 작업의 시작 시간이 현재 시간이랑 같을 때,
+        if (!tasks.empty() && tasks.top().start_time == current_time) {
+            // 현재 작업이 남아있을 때 중단 작업 스택에 현재 작업 Push
+            if (current_task.running_time > 0) {
                 paused_tasks.push(current_task);
             }
             // 현재 작업을 다음 작업으로 업데이트
-            task_idx++;
-            current_task = tasks[task_idx];
+            current_task = tasks.top();
+            tasks.pop();
         }
-        // 중단된 작업이 있으면
-        else if (!paused_tasks.empty()) {
-            if (current_task.remaining_time > 0) {
-                paused_tasks.push(current_task);
+        // 현재 작업 시간이 남아있으면 감소
+        if (current_task.running_time > 0) {
+            current_task.running_time--;
+            //현재 업무가 종료되면 answer에 Push
+            if (current_task.running_time == 0) {
+                answer.push_back(current_task.subject);
+                // 중단 업무 리스트가 비어있지 않으면 그 중단 업무를 다음 업무로 업데이트
+                if (!paused_tasks.empty()) {
+                    current_task = paused_tasks.top();
+                    paused_tasks.pop();
+                // 아니면 현재 업무 비워두기
+                } else {
+                    current_task = {"", 0, 0};
+                }
             }
-            current_task = paused_tasks.front();
-            paused_tasks.pop();
-        } 
-        
-        // 현재 작업의 남은시간 1분씩 감소
-        current_task.remaining_time--;
-        
-        // 현재 작업의 남은 시간이 0일 때 answer에 push
-        if (current_task.remaining_time == 0) {
-            answer.push_back(current_task.subject);
-            current_task = {}; // 초기화
         }
+        current_time++;
+    }
+    // 남아 있는 마지막 작업 처리
+    while (!paused_tasks.empty()) {
+            answer.push_back(paused_tasks.top().subject);
+            paused_tasks.pop();
+    }
         
-        // next subject time
-        int next_start = task_idx < tasks.size() ? tasks[task_idx].start_time : 2400;
-        // decide next time
-        int next_time = min(next_start , current_time + current_task.remaining_time);
-        // update current time
-        current_time = next_time;
-    }
-    
-    // 마지막 처리
-    if (current_task.remaining_time == 0 && !current_task.subject.empty()) {
-        answer.push_back(current_task.subject);
-    }
-    
     return answer;
 }
