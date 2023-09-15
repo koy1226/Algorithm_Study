@@ -1,6 +1,22 @@
 {
     "files.associations": {
         "vector": "cpp",
-        "queue": "cpp"
+        "queue": "cpp",
+        "algorithm": "cpp",
+        "limits": "cpp",
+        "utility": "cpp",
+        "xutility": "cpp",
+        "array": "cpp",
+        "deque": "cpp",
+        "format": "cpp",
+        "initializer_list": "cpp",
+        "list": "cpp",
+        "ranges": "cpp",
+        "span": "cpp",
+        "xhash": "cpp",
+        "xstring": "cpp",
+        "xtree": "cpp",
+        "stack": "cpp",
+        "type_traits": "cpp"
     }
 }
