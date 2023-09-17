@@ -39,7 +39,7 @@ picks	minerals	result
 [1, 3, 2]	["diamond", "diamond", "diamond", "iron", "iron", "diamond", "iron", "stone"]	12
 [0, 1, 1]	["diamond", "diamond", "diamond", "diamond", "diamond", "iron", "iron", "iron", "iron", "iron", "diamond"]	50
 */
-
+#include <string>
 #include <vector>
 #include <algorithm>
 using namespace std;
