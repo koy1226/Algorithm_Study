@@ -65,3 +65,63 @@ long long solution(vector<int> weights) {
     }
     return answer;
 }
+/* Case 2: case 1을 깔끔하게
+
+...
+
+// 다른 무게의 원소에 대한 조합을 더한다.
+vector<pair<int, int>> ratios = {{3, 2}, {4, 3}, {2, 1}};
+    
+    for(int weight : weights) {
+        for(auto& ratio : ratios) {
+            int numerator = ratio.first, denominator = ratio.second;
+            
+            if((weight * numerator) % denominator == 0) {
+                int paired_weight = (weight * numerator) / denominator;
+                
+                if(weight_cnt.find(paired_weight) != weight_cnt.end()) {
+                    answer += weight_cnt[paired_weight];
+                }
+            }
+        }
+    }
+...
+
+*/
+/* Case 3: 깔끔하지만 부동소수점의 오류..
+#include <string>
+#include <vector>
+#include <unordered_map>
+
+using namespace std;
+
+long long solution(vector<int> weights) {
+    long long answer = 0;
+    unordered_map<int, int> weight_cnt;
+    
+    // 무게별로 몇 개씩 있는지 센다.
+    for (int weight : weights) {
+        weight_cnt[weight]++;
+    }
+    
+    // 같은 무게의 원소에 대한 조합을 더한다.
+    for (auto [weight, cnt] : weight_cnt) {
+        if (cnt >= 2) {
+            answer += (long long)cnt * (cnt - 1) / 2;
+        }
+    }
+
+    // 다른 무게의 원소에 대한 조합을 더한다.
+    vector<double> ratios = {3.0 / 2, 4.0 / 3, 2.0};
+    for(int weight : weights) {
+        for(double ratio : ratios) {
+            int paired_weight = weight * ratio;
+            if(weight_cnt.find(paired_weight) != weight_cnt.end()) {
+                answer += weight_cnt[paired_weight];
+            }
+        }
+    }
+
+    return answer;
+}
+*/
