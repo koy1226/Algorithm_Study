@@ -57,7 +57,7 @@ int solution(int N, int number) {
 }
 
 /*
-��� 2)
+Case 2)
 #include <string>
 #include <vector>
 
