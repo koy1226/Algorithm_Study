@@ -2,7 +2,7 @@
 #include <vector>
 
 using namespace std;
-// ÃÖ´ë°ø¾à¼ö ÇÔ¼ö ¼±¾ð
+// ê³µì•½ìˆ˜ ì°¾ê¸°
 int GCD(int num, int den)
 {
     while (den != 0)
@@ -20,7 +20,7 @@ vector<int> solution(int numer1, int denom1, int numer2, int denom2) {
     int num1 = numer1 * denom2;
     int num2 = numer2 * denom1;
     int numer = num1 + num2;
-    int gcd = GCD(numer, denom); // ÃÖ´ë°ø¾à¼ö 
+    int gcd = GCD(numer, denom); // í•¨ìˆ˜ í˜¸ì¶œ
 
     numer /= gcd;
     denom /= gcd;
