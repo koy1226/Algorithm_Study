@@ -33,7 +33,7 @@ int DFS(int k, vector<vector<int>> &dungeons, int visited) {
     int n = dungeons.size();
     int max_cnt = 0;
 
-    for (int i = 0; i < n; ++i) {
+    for (int i = 0; i < n; i++) {
         // 아직 방문하지 않은 던전인 경우
         if ((visited & (1 << i)) == 0) { 
             int required = dungeons[i][0];
@@ -81,7 +81,7 @@ int solution(int k, vector<vector<int>> dungeons) {
         
         max_cnt = max(max_cnt, cur.cnt);
         
-        for (int i = 0; i < n; ++i) {
+        for (int i = 0; i < n; i++) {
             if ((cur.visited & (1 << i)) == 0) {
                 int required = dungeons[i][0];
                 int consumed = dungeons[i][1];

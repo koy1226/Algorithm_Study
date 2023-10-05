@@ -38,7 +38,7 @@ using namespace std;
 
 int solution(string begin, string target, vector<string> words) {
     int answer = 0;
-    // 단어 탐색할 때 시간 복잡도 O(1)
+    // set : 단어 탐색할 때 시간 복잡도 O(1)
     unordered_set<string> wordSet(words.begin(), words.end());
 
     if (wordSet.find(target) == wordSet.end()) {
@@ -50,7 +50,7 @@ int solution(string begin, string target, vector<string> words) {
     
     while (!q.empty()) {
         string current = q.front().first;
-        int answer = q.front().second;
+        answer = q.front().second;
         q.pop();
         
         if (current == target) {
