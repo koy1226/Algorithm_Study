@@ -17,6 +17,7 @@
         "xstring": "cpp",
         "xtree": "cpp",
         "stack": "cpp",
-        "type_traits": "cpp"
+        "type_traits": "cpp",
+        "string": "cpp"
     }
 }
