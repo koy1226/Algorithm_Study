@@ -1,25 +1,5 @@
 /*
-¹®Á¦
-³²ºÏÀ¸·Î Èå¸£´Â °³¿ï¿¡ µ¿¼­·Î Â¡°Ë´Ù¸®°¡ ³õ¿©Á® ÀÖ´Ù.
-ÀÌ Â¡°Ë´Ù¸®ÀÇ µ¹Àº µé¾¦³¯¾¦ÇÏ¿© ³ôÀÌ°¡ ¸ğµÎ ´Ù¸£´Ù. Ã¶¼ö´Â °³¿ïÀÇ 
-¼­ÂÊ¿¡¼­ µ¿ÂÊÀ¸·Î ³ôÀÌ°¡ Á¡Á¡ ³ôÀº µ¹À» ¹âÀ¸¸é¼­ °³¿ïÀ» Áö³ª°¡·Á°í ÇÑ´Ù.
-µ¹ÀÇ ³ôÀÌ°¡ ¼­ÂÊÀÇ µ¹ºÎÅÍ µ¿ÂÊ¹æÇâÀ¸·Î ÁÖ¾îÁ³À» ¶§ Ã¶¼ö°¡ ¹âÀ» ¼ö ÀÖ´Â µ¹ÀÇ ÃÖ´ë °³¼ö´Â?
-
-Á¦¾àÁ¶°Ç
-1 ¡Â N ¡Â 3¡¿103 ÀÎ Á¤¼ö
-1 ¡Â Ai ¡Â 108 ÀÎ Á¤¼ö
-
-ÀÔ·ÂÇü½Ä
-Ã¹ ¹øÂ° ÁÙ¿¡ µ¹ÀÇ °³¼ö NÀÌ ÁÖ¾îÁø´Ù.
-µÎ ¹øÂ° ÁÙ¿¡ µ¹ÀÇ ³ôÀÌ Ai (1 ¡Â i ¡Â N)°¡ ¼­ÂÊºÎÅÍ µ¿ÂÊÀ¸·Î Â÷·Ê·Î ÁÖ¾îÁø´Ù.
-
-Ãâ·ÂÇü½Ä
-Ã¹ ¹øÂ° ÁÙ¿¡ Ã¶¼ö°¡ ¹âÀ» ¼ö ÀÖ´Â µ¹ÀÇ ÃÖ´ë °³¼ö¸¦ Ãâ·ÂÇÏ¶ó.
-
-ÀÔ·Â¿¹Á¦1
-5 3 2 1 4 5
-Ãâ·Â¿¹Á¦1
-3
+Practice Link: https://softeer.ai/practice/6293
 */
 #include "Common.h"
 
@@ -53,3 +33,62 @@ int main()
 
     return 0;
 }
+/*
+Case 2 : BinarySearch
+#include<iostream>
+#include<vector>
+
+using namespace std;
+
+vector<int> lis;
+int binarysearch(int left, int right, int target) {
+
+	int mid;
+
+    // lis ë°°ì—´ì— ë“¤ì–´ê°ˆ target=arr[i]ì˜ ìœ„ì¹˜ë¥¼ ì´ë¶„íƒìƒ‰ìœ¼ë¡œ ì°¾ê¸°
+
+	while (left < right) {
+		mid = (left + right) / 2; // ì¤‘ê°„ê°’ ì„¤ì •
+
+		if (lis[mid] < target) {
+			left = mid + 1;
+		}
+		else {
+			right = mid;
+		}
+	}
+	return right;
+}
+
+int main(int argc, char** argv)
+{
+  ios_base::sync_with_stdio(false);
+  cin.tie(NULL);
+  cout.tie(NULL);
+
+  int N;
+  cin >> N;
+  
+  vector<int> arr(N);
+  for (int i = 0; i < N; i++) {
+    cin >> arr[i];
+  }
+
+  lis.push_back(arr[0]);
+  int length = 1;
+
+  for (int i = 1; i < N; i++) {
+    if (lis[length - 1] < arr[i]) {
+      lis.push_back(arr[i]);
+      length++;
+    } else {
+      int idx = binarysearch(0, length - 1, arr[i]);
+      lis[idx] = arr[i];
+    }
+  }
+
+  cout << length << endl;
+  
+   return 0;
+}
+*/
